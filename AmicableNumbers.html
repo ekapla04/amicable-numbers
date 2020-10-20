@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Amicable Numbers</title>
+	
+<script language="javascript">
+    window.onload=main();
+    document.getElementById("numbers").innerHTML = "";
+    function main()
+    {
+        num1 = document.amicableNumbers.number1.value;
+        num2 = document.amicableNumbers.number2.value;
+        if ((!isNaN(num1)) && (!isNaN(num2))){
+            total1 = addArray(getFactors(num1));
+            total2 = addArray(getFactors(num2));
+            isAmicable(num1, num2, total1, total2);
+        }
+        else {
+            document.getElementById("numbers").innerHTML = "invalid input <br>";
+        }
+    }
+
+    function isFactor(number, factor)
+    {
+
+        if ((!isNaN(number)) && (!isNaN(factor))){
+            if (number % factor == 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        document.write("input invalid <br>");
+        return false;
+    }
+    
+    function showArray(nums)
+    {
+        if (nums.length > 0){
+            document.getElementById("numbers").innerHTML += "numbers: <br>";
+            for (var i = 0; i < nums.length; i++){
+                document.getElementById("numbers").innerHTML += "&nbsp&nbsp" + 
+                                                                "&nbsp&nbsp" +
+                                                                "&nbsp&nbsp" +
+                                                                "&nbsp&nbsp" +
+                                                                "&nbsp&nbsp" +
+                                                                "&nbsp&nbsp" +
+                                                                "&nbsp&nbsp" +
+                                                                nums[i] + "<br>";
+            }
+        }
+        else {
+            document.getElementById("numbers").innerHTML += "empty array <br>";
+            return;
+        }
+    }
+
+    function addArray(nums)
+    {
+        var total = 0;
+        if (nums.length > 0){
+            document.getElementById("numbers").innerHTML += "sum of numbers: ";
+            for (var i = 0; i < nums.length; i++){
+                if (!isNaN(nums[i])) {
+                    total = total + parseInt(nums[i]);
+                }
+                else {
+                    document.getElementById("numbers").innerHTML += "invalid input <br>";
+                    return;
+                }
+            }
+            document.getElementById("numbers").innerHTML += total + "<br>";
+        }
+        else {
+            document.getElementById("numbers").innerHTML += "empty array <br>";
+            return 0;
+        }    
+        return total;
+    }
+
+    function getFactors(num) 
+    {
+        factors = [];
+        negNum = false;
+        if (num < 0){
+            num = parseInt(num) * -1;
+            negNum = true;
+        }
+        for (var i = 0; i < num; i++) {
+            if (isFactor(num, i)){
+                if (negNum) {
+                    factors.push(-i);
+                }
+                factors.push(i);
+            }
+        }
+        factors.sort((a,b)=>a-b);
+        return factors;
+    }
+
+    function isAmicable(num1, num2, total1, total2)
+    {
+        if ((parseInt(num1) == (parseInt(total2))) && 
+           ((parseInt(num2)) == (parseInt(total1)))) {
+            document.getElementById("numbers").innerHTML = "numbers " +
+                                                            num1 + " &  " + num2
+                                                            + " are amicable";
+        }
+        else {
+            document.getElementById("numbers").innerHTML = "numbers " +
+                                                            num1 + " & " + num2 
+                                                            + " not amicable";
+        }
+    }
+    /* Test code to print inputted numbers
+        function printNums(number) 
+        {
+            result = "number: " + number + "<br />";
+
+            // number2 = document.amicableNumbers.number2.value;
+            // result1 += "Second number: " + number2 + "<br />";
+
+            // isFactor(number1, number2);
+
+            document.getElementById("numbers").innerHTML += result;
+        }
+    */
+
+
+    /* Test code for isFactor
+        if (isFactor(12, 3)) {
+            document.write("3 is a factor of 12 <br>");
+        }
+        if (!isFactor("e", 4)){
+            document.write("4 is not a factor of e <br>");
+        }
+        if (isFactor(11, 3)) {
+            document.write("3 is a factor of 11 <br>");
+        }
+        else if (!isFactor(11,3)) {
+            document.write("3 is not a factor of 11 <br>");
+        }
+    */
+
+    /* Test code for showArray
+        var nums = [];
+        showArray(nums);
+        nums = [1, 4, 5, 6, 8, 9];
+        showArray(nums);
+    */
+
+    /* Test code for addArray
+        var nums = [];
+        addArray(nums);
+        nums = [1, 4, 5, 6, 8, 9];
+        addArray(nums);
+        nums = [3, "e", 8, 9];
+    */
+
+    /* Test code for getFactor
+        showArray(getFactors(-64));
+        showArray(getFactors("e"));
+        showArray(getFactors(10));
+    */
+
+</script>
+</head>
+
+<body>
+    <form name="amicableNumbers">
+        Enter Number 1 <input type = "text"
+                        name="number1" id="amicable_number1">
+        <br />
+        <br />
+        Enter Number 2 <input type = "text"
+                        name="number2" id="amicable_number2">
+        
+        <br />
+        <br />
+        <input type = "button" onclick="main()"
+                id= "submit-numbers"
+                value="Submit Numbers">
+        
+        </form>
+        <hr>
+        <div id="numbers"></div>
+
+</body>
+</html>
