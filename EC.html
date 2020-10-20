@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Extra Credit</title>
+<script language="javascript">
+		function copy()
+		{
+            var n1 = document.getElementById("n1");
+            var n2 = document.getElementById("n2");
+            var button = document.getElementById("button");
+            if (n1.value == "" && n2.value != "") {
+                n1.value = n2.value;
+                n2.value = "";
+                button.value = "-->";
+            }
+            else if (n1.value != "" && n2.value == ""){
+                n2.value = n1.value;
+                n1.value = "";
+                button.value = "<--";
+            }
+		}
+	
+</script>
+</head>
+
+<body>
+    Box1 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Box2 <br>
+    <input type="text" name="n1" id="n1">
+    <input type="button" value="-->" id="button" onClick="copy();" />
+    <input type="text" name="n2" id="n2"/>
+</body>
+</html>
